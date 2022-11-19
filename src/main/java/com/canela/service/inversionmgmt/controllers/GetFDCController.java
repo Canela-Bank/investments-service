@@ -37,8 +37,17 @@ public class GetFDCController {
 		 
 		 try {
 			 String url = "http://localhost:3001/graphql";
-			 String operation = "";
-			 String query = "";
+			 String operation = "getFcdByUser";
+			 String query = "query{getFcdByUser(user_document:\""+request.userDocument+"\",user_document_type:"+request.typeDocument+"){\n"
+			 		+ "  id\n"
+			 		+ "  value\n"
+			 		+ "  start_date\n"
+			 		+ "  finish_date\n"
+			 		+ "  debt\n"
+			 		+ "  status\n"
+			 		+ "  user_id\n"
+			 		+ "  user_document_type\n"
+			 		+ "}}";
 			
 			 // GraphQL request 
 				 CloseableHttpClient client = HttpClientBuilder.create().build();
@@ -80,6 +89,7 @@ public class GetFDCController {
 
 	     private String userDocument;
 	     private int typeDocument;
+	     
 		public String getUserDocument() {
 			return userDocument;
 		}
