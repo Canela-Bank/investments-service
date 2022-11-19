@@ -14,7 +14,7 @@ public class Cdt {
     private Double value;
     private String start_date;
     private String finish_date;
-    private Double debt;
+    private Double rate;
     private Boolean status;
     private String user_id;
     private Integer user_document_type;
@@ -23,7 +23,7 @@ public class Cdt {
                @JsonProperty("value") Double value,
                @JsonProperty("start_date") String start_date,
                @JsonProperty("finish_date") String finish_date,
-               @JsonProperty("debt") Double debt,
+               @JsonProperty("rate") Double rate,
                @JsonProperty("status") Boolean status,
                @JsonProperty("user_id") String user_id,
                @JsonProperty("user_document_type") Integer user_document_type) {
@@ -31,7 +31,7 @@ public class Cdt {
         this.value = value;
         this.start_date = start_date;
         this.finish_date = finish_date;
-        this.debt = debt;
+        this.rate = rate;
         this.status = status;
         this.user_id = user_id;
         this.user_document_type = user_document_type;
