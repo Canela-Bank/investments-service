@@ -1,0 +1,32 @@
+{
+  "CDT": [
+    {
+      "id": "3",
+      "value": 50000000,
+      "start_date": "2022-09-10",
+      "finish_date": "2023-05-12",
+      "debt": 5.9,
+      "status": true,
+      "user_id": null,
+      "user_document_type": null
+    },
+    {
+      "id": "4",
+      "value": 100000000,
+      "debt": 3.2,
+      "status": true,
+      "user_id": null,
+      "user_document_type": null
+    },
+    {
+      "id": "5",
+      "value": 6000000,
+      "start_date": "2022-10-1",
+      "finish_date": "2023-05-12",
+      "debt": 1.2,
+      "status": true,
+      "user_id": null,
+      "user_document_type": null
+    }
+  ]
+}
