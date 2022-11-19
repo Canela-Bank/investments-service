@@ -15,7 +15,7 @@ import org.apache.http.impl.client.HttpClientBuilder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -27,18 +27,16 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 //uri: http://10.0.0.0:9003/
 
 @RestController
-@RequestMapping(value = "/api/inversions")
+@RequestMapping(value = "/api/investments")
 public class GetFDCController {
 	
-	 @GetMapping(value = "/getUserFDCS" )
-	 @CrossOrigin("*")
-	    public ResponseEntity<String> getUserFDCS(@RequestBody fdcsRequest request) {	
-		 
-		 
+	 @GetMapping(value = "/getUserFDCS/{document}/{typeDocument}")
+	    public ResponseEntity<String> getUserFDCS(@PathVariable String document, @PathVariable String typeDocument) {	
+		 	 
 		 try {
 			 String url = "http://localhost:3001/graphql";
 			 String operation = "getFcdByUser";
-			 String query = "query{getFcdByUser(user_document:\""+request.userDocument+"\",user_document_type:"+request.typeDocument+"){\n"
+			 String query = "query{getFcdByUser(user_document:\""+document+"\",user_document_type:"+typeDocument+"){\n"
 			 		+ "  id\n"
 			 		+ "  value\n"
 			 		+ "  start_date\n"
@@ -73,8 +71,7 @@ public class GetFDCController {
 			        }
 			        // Return response 
 			        else{
-			        	 JsonNode UserFdcs = node.get("data").get(operation);
-					        
+			        	 JsonNode UserFdcs = node.get("data").get(operation);	        
 					     return ResponseEntity.status(HttpURLConnection.HTTP_ACCEPTED).body(UserFdcs.toString());
 			        }
 
