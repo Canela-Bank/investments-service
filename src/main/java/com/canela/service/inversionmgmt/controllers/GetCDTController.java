@@ -29,9 +29,9 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 @RequestMapping(value = "/api/inversions")
 public class GetCDTController {
 	
-	 @GetMapping(value = "/getCDTS" )
+	 @GetMapping(value = "/getUserCDTS" )
 	 @CrossOrigin("*")
-	    public ResponseEntity<String> getCDTS(@RequestBody cdtRequest request) {	
+	    public ResponseEntity<String> getUserCDTS(@RequestBody cdtsRequest request) {	
 		 	 
 		 try {
 			// GraphQL info 
@@ -73,7 +73,7 @@ public class GetCDTController {
 		}	
 	}
 	 
-	 static class cdtRequest {
+	 static class cdtsRequest {
 
 	     private String userDocument;
 	     private int typeDocument;

@@ -30,9 +30,9 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 @RequestMapping(value = "/api/inversions")
 public class GetFDCController {
 	
-	 @GetMapping(value = "/getFDCS" )
+	 @GetMapping(value = "/getUserFDCS" )
 	 @CrossOrigin("*")
-	    public ResponseEntity<String> getFDCS(@RequestBody fdcRequest request) {	
+	    public ResponseEntity<String> getUserFDCS(@RequestBody fdcsRequest request) {	
 		 
 		 
 		 try {
@@ -76,7 +76,7 @@ public class GetFDCController {
 		 
 	 } 
 	 
-	 static class fdcRequest {
+	 static class fdcsRequest {
 
 	     private String userDocument;
 	     private int typeDocument;
