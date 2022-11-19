@@ -36,8 +36,17 @@ public class GetCDTController {
 		 try {
 			// GraphQL info 
 			 String url = "http://localhost:3001/graphql";
-			 String operation = "";
-			 String query = "";
+			 String operation = "getTrustsByUser";
+			 String query = "query{getTrustsByUser(user_document:\""+request.userDocument+"\",user_document_type:"+request.typeDocument+"){\n"
+			 		+ "  id\n"
+			 		+ "  value\n"
+			 		+ "  start_date\n"
+			 		+ "  finish_date\n"
+			 		+ "  rate\n"
+			 		+ "  status\n"
+			 		+ "  user_id\n"
+			 		+ "  user_document_type\n"
+			 		+ "}}";
 			
 			 // GraphQL request 
 				 CloseableHttpClient client = HttpClientBuilder.create().build();
