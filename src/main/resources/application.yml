@@ -1,0 +1,7 @@
+server:
+  port: 9003
+
+application:
+  name: Service Invesment Management 
+  description: API created to manage investments
+
