@@ -1,6 +1,7 @@
-package com.canela.service.inversionmgmt.controller;
+package com.canela.service.inversionmgmt.controllers;
 
 import com.canela.service.inversionmgmt.model.Cdt;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.http.HttpStatus;
@@ -25,13 +26,18 @@ import java.util.Random;
 @RequestMapping("/api/inversions")
 @SpringBootApplication(exclude = {DataSourceAutoConfiguration.class })
 public class CreateCDTController {
+    @Value("${integrators.data.ip}")
+    private String dataIp;
+
+    @Value("${integrators.data.port}")
+    private String dataPort;
     @PostMapping("/create")
     public ResponseEntity<String> createCdt(@RequestBody Cdt nuevo){
         URL url = null;
       try{
           Random random = new Random();
           String cdtId = String.valueOf(random.nextLong(1000000000L));
-          url= new URL("http://localhost:3002/graphql?query=mutation%7B%0A%20%20createTrust(id%3A%22"+cdtId+"%22%2Cvalue%3A"+nuevo.getValue()+"%2Cstart_date%3A%22"+nuevo.getStart_date()+"%22%2Cfinish_date%3A%22"+nuevo.getFinish_date()+"%22%2Crate%3A"+nuevo.getRate()+"%2Cstatus%3A"+nuevo.getStatus()+"%2Cuser_id%3A%22"+nuevo.getUser_id()+"%22%2Cuser_document_type%3A"+nuevo.getUser_document_type()+")%20%7B%0A%20%20%20%20id%0A%20%20%7D%0A%7D");
+          url= new URL("http://"+dataIp+":"+dataPort+"/graphql?query=mutation%7B%0A%20%20createTrust(id%3A%22"+cdtId+"%22%2Cvalue%3A"+nuevo.getValue()+"%2Cstart_date%3A%22"+nuevo.getStart_date()+"%22%2Cfinish_date%3A%22"+nuevo.getFinish_date()+"%22%2Crate%3A"+nuevo.getRate()+"%2Cstatus%3A"+nuevo.getStatus()+"%2Cuser_id%3A%22"+nuevo.getUser_id()+"%22%2Cuser_document_type%3A"+nuevo.getUser_document_type()+")%20%7B%0A%20%20%20%20id%0A%20%20%7D%0A%7D");
           HttpURLConnection conn = (HttpURLConnection) url.openConnection();
           conn.setRequestMethod("POST");
           int response = conn.getResponseCode();
