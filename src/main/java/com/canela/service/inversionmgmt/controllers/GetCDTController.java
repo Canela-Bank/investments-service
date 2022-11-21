@@ -25,7 +25,7 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 //uri: http://10.0.0.0:9003/
 
 @RestController
-@RequestMapping(value = "/api/investments")
+@RequestMapping(value = "/api/inversions")
 public class GetCDTController {
 	
 	 @GetMapping(value = "/getUserCDTS/{document}/{typeDocument}")
@@ -33,7 +33,7 @@ public class GetCDTController {
 		 	 
 		 try {
 			// GraphQL info 
-			 String url = "http://localhost:3001/graphql";
+			 String url = "http://localhost:3002/graphql";
 			 String operation = "getTrustsByUser";
 			 String query = "query{getTrustsByUser(user_document:\""+document+"\",user_document_type:"+typeDocument+"){\n"
 			 		+ "  id\n"

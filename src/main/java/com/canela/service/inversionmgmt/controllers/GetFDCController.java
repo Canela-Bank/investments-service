@@ -27,14 +27,14 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 //uri: http://10.0.0.0:9003/
 
 @RestController
-@RequestMapping(value = "/api/investments")
+@RequestMapping(value = "/api/inversions")
 public class GetFDCController {
 	
 	 @GetMapping(value = "/getUserFDCS/{document}/{typeDocument}")
 	    public ResponseEntity<String> getUserFDCS(@PathVariable String document, @PathVariable String typeDocument) {	
 		 	 
 		 try {
-			 String url = "http://localhost:3001/graphql";
+			 String url = "http://localhost:3002/graphql";
 			 String operation = "getFcdByUser";
 			 String query = "query{getFcdByUser(user_document:\""+document+"\",user_document_type:"+typeDocument+"){\n"
 			 		+ "  id\n"
