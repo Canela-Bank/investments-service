@@ -12,6 +12,7 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.utils.URIBuilder;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,13 +28,18 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 @RestController
 @RequestMapping(value = "/api/inversions")
 public class GetCDTController {
-	
+	@Value("${integrators.data.ip}")
+	private String dataIp;
+
+	@Value("${integrators.data.port}")
+	private String dataPort;
+
 	 @GetMapping(value = "/getUserCDTS/{document}/{typeDocument}")
 	    public ResponseEntity<String> getUserCDTS(@PathVariable String document, @PathVariable String typeDocument) {	
 		 	 
 		 try {
 			// GraphQL info 
-			 String url = "http://localhost:3002/graphql";
+			 String url = "http://"+dataIp+":"+dataPort+"/graphql";
 			 String operation = "getTrustsByUser";
 			 String query = "query{getTrustsByUser(user_document:\""+document+"\",user_document_type:"+typeDocument+"){\n"
 			 		+ "  id\n"

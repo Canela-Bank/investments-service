@@ -12,6 +12,7 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.utils.URIBuilder;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,12 +30,16 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 @RestController
 @RequestMapping(value = "/api/inversions")
 public class GetFDCController {
-	
+	@Value("${integrators.data.ip}")
+	private String dataIp;
+
+	@Value("${integrators.data.port}")
+	private String dataPort;
 	 @GetMapping(value = "/getUserFDCS/{document}/{typeDocument}")
 	    public ResponseEntity<String> getUserFDCS(@PathVariable String document, @PathVariable String typeDocument) {	
 		 	 
 		 try {
-			 String url = "http://localhost:3002/graphql";
+			 String url = "http://"+dataIp+":"+dataPort+"/graphql";
 			 String operation = "getFcdByUser";
 			 String query = "query{getFcdByUser(user_document:\""+document+"\",user_document_type:"+typeDocument+"){\n"
 			 		+ "  id\n"
