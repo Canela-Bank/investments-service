@@ -18,6 +18,7 @@ import com.alibaba.fastjson.JSONObject;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
+import java.util.Random;
 
 
 @RestController
@@ -28,7 +29,9 @@ public class CreateCDTController {
     public ResponseEntity<String> createCdt(@RequestBody Cdt nuevo){
         URL url = null;
       try{
-          url= new URL("http://localhost:3002/graphql?query=mutation%7B%0A%20%20createTrust(id%3A%22"+nuevo.getId()+"%22%2Cvalue%3A"+nuevo.getValue()+"%2Cstart_date%3A%22"+nuevo.getStart_date()+"%22%2Cfinish_date%3A%22"+nuevo.getFinish_date()+"%22%2Crate%3A"+nuevo.getRate()+"%2Cstatus%3A"+nuevo.getStatus()+"%2Cuser_id%3A%22"+nuevo.getUser_id()+"%22%2Cuser_document_type%3A"+nuevo.getUser_document_type()+")%20%7B%0A%20%20%20%20id%0A%20%20%7D%0A%7D");
+          Random random = new Random();
+          String cdtId = String.valueOf(random.nextLong(1000000000L));
+          url= new URL("http://localhost:3002/graphql?query=mutation%7B%0A%20%20createTrust(id%3A%22"+cdtId+"%22%2Cvalue%3A"+nuevo.getValue()+"%2Cstart_date%3A%22"+nuevo.getStart_date()+"%22%2Cfinish_date%3A%22"+nuevo.getFinish_date()+"%22%2Crate%3A"+nuevo.getRate()+"%2Cstatus%3A"+nuevo.getStatus()+"%2Cuser_id%3A%22"+nuevo.getUser_id()+"%22%2Cuser_document_type%3A"+nuevo.getUser_document_type()+")%20%7B%0A%20%20%20%20id%0A%20%20%7D%0A%7D");
           HttpURLConnection conn = (HttpURLConnection) url.openConnection();
           conn.setRequestMethod("POST");
           int response = conn.getResponseCode();
